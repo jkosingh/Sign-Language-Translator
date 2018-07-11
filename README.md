@@ -2,24 +2,24 @@
 Be able to acknowledge sign language graphically. Multiple uses. 
 
 
-Description of the Project
+	Description of the Project
 The idea behind this project is to successfully capture a sequence of American Sign Language symbols via camera and, through image processing, translate the hand gestures into English text.
 
 
 	Objectives of Project 
-		Be able to successfully recognize American Sign Language through live video and translate successfully into text through the following steps:
-		Render video footage (of average phone camera quality) into frames using python and openGL scripting to compare with sign language database
-		 Segment the area of interest from the frames using image processing techniques in python, specifically the scikit library to achieve imaging labeling
-		Implement multiple feature extraction algorithms to represent image data in a more useful way
-		Train algorithm to recognize the data using multiple machine learning algorithms or database lookup for pattern recognition, classification and regression to match proper sign language symbols
-		Translate recognized sign language symbols to text through use of lookup table or machine learning algorithm and display for user
+Be able to successfully recognize American Sign Language through live video and translate successfully into text through the following steps:
+	Render video footage (of average phone camera quality) into frames using python and openGL scripting to compare with sign 		language database
+	Segment the area of interest from the frames using image processing techniques in python, specifically the scikit library to 		achieve imaging labeling
+	Implement multiple feature extraction algorithms to represent image data in a more useful way
+	Train algorithm to recognize the data using multiple machine learning algorithms or database lookup for pattern recognition, 		classification and regression to match proper sign language symbols
+	Translate recognized sign language symbols to text through use of lookup table or machine learning algorithm and display for 		user
 
 
 	Expected Methodologies
+	
    		K Nearest Neighbors Algorithm
-			Algorithm in pattern recognition for classification and regression. For specified odd value of K, the image is partitioned into groups to determine which part is hand and which is background. Support and documentation on how to achieve this using OpenCV, python and scilabs found here [28]: https://docs.opencv.org/2.4/modules/ml/doc/k_nearest_neighbors.html 
-    
-    
+Algorithm in pattern recognition for classification and regression. For specified odd value of K, the image is partitioned into groups to determine which part is hand and which is background. Support and documentation on how to achieve this using OpenCV, python and scilabs found here [28]: https://docs.opencv.org/2.4/modules/ml/doc/k_nearest_neighbors.html 
+        
     Logistic Regression
 Borrowed from statistics for classification similar to linear regression to help us tell what is part of the hand to what is background. Specifically the logistic function maps any input value taken in (image vector representation) and maps it into a binary value of  0 or 1. This is done with the formula:
 y = e^(b0 + b1*x) / (1 + e^(b0 + b1*x))
@@ -35,11 +35,11 @@ Yet another classification technique, this time giving us the best assumption fi
 
 
      Random Forest
-	Another classification techniques, very similar to the previous Naive Bayes algorithm. The Random forest algorithm is a supervised learning algorithm based on the idea that using a lot of different combinational learning models increase the overall accuracy of the result. The biggest advantage of it is that it can be used for not only classification, but also regression in machine learning. Support and documentation on how this is done in python can be found here [32]: https://towardsdatascience.com/the-random-forest-algorithm-d457d499ffcd
+Another classification techniques, very similar to the previous Naive Bayes algorithm. The Random forest algorithm is a supervised learning algorithm based on the idea that using a lot of different combinational learning models increase the overall accuracy of the result. The biggest advantage of it is that it can be used for not only classification, but also regression in machine learning. Support and documentation on how this is done in python can be found here [32]: https://towardsdatascience.com/the-random-forest-algorithm-d457d499ffcd
   
   
      Histogram of Oriented Gradients
 The Histogram of Oriented Gradients method of representing image pixels in vector form for input into later machine learning algorithms. The algorithm can be used for our project to take the frames collected from the video of the sign language happening and transfer it into a more useful representation. For more information on implementation in python and use [33]: https://jakevdp.github.io/PythonDataScienceHandbook/05.14-image-features.html 
 
-OpenCV Image Processing
-	To Segment the area of interest from the frames, we must using image processing techniques in python or openCV. Although there are many implementations out there, for sake of code completion and integration, we’ll try to achieve this using the the scikit-image library. For a list of implementations that could be done in python as well as there documentation please visit [34]: http://scikit-image.org/docs/dev/auto_examples/segmentation/plot_label.html 
+	OpenCV Image Processing
+To Segment the area of interest from the frames, we must using image processing techniques in python or openCV. Although there are many implementations out there, for sake of code completion and integration, we’ll try to achieve this using the the scikit-image library. For a list of implementations that could be done in python as well as there documentation please visit [34]: http://scikit-image.org/docs/dev/auto_examples/segmentation/plot_label.html 
