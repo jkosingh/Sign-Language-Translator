@@ -6,18 +6,18 @@ Description of the Project
 The idea behind this project is to successfully capture a sequence of American Sign Language symbols via camera and, through image processing, translate the hand gestures into English text.
 
 
-Objectives of Project 
-Be able to successfully recognize American Sign Language through live video and translate successfully into text through the following steps:
-Render video footage (of average phone camera quality) into frames using python and openGL scripting to compare with sign language database
- Segment the area of interest from the frames using image processing techniques in python, specifically the scikit library to achieve imaging labeling
-Implement multiple feature extraction algorithms to represent image data in a more useful way
-Train algorithm to recognize the data using multiple machine learning algorithms or database lookup for pattern recognition, classification and regression to match proper sign language symbols
-Translate recognized sign language symbols to text through use of lookup table or machine learning algorithm and display for user
+	Objectives of Project 
+		Be able to successfully recognize American Sign Language through live video and translate successfully into text through the following steps:
+		Render video footage (of average phone camera quality) into frames using python and openGL scripting to compare with sign language database
+		 Segment the area of interest from the frames using image processing techniques in python, specifically the scikit library to achieve imaging labeling
+		Implement multiple feature extraction algorithms to represent image data in a more useful way
+		Train algorithm to recognize the data using multiple machine learning algorithms or database lookup for pattern recognition, classification and regression to match proper sign language symbols
+		Translate recognized sign language symbols to text through use of lookup table or machine learning algorithm and display for user
 
-6.3.   Expected Methodologies
-   
-   K Nearest Neighbors Algorithm
-Algorithm in pattern recognition for classification and regression. For specified odd value of K, the image is partitioned into groups to determine which part is hand and which is background. Support and documentation on how to achieve this using OpenCV, python and scilabs found here [28]: https://docs.opencv.org/2.4/modules/ml/doc/k_nearest_neighbors.html 
+
+	Expected Methodologies
+   		K Nearest Neighbors Algorithm
+			Algorithm in pattern recognition for classification and regression. For specified odd value of K, the image is partitioned into groups to determine which part is hand and which is background. Support and documentation on how to achieve this using OpenCV, python and scilabs found here [28]: https://docs.opencv.org/2.4/modules/ml/doc/k_nearest_neighbors.html 
     
     
     Logistic Regression
