@@ -6,11 +6,13 @@ Run Code by running:  python VideoFrame2.py <br />
 <br />
 Need to run from SignRecognition directory. This will create frames and extract to SignRecognition/DATA/EXPORT directory and 		then port them into an array (Y_data). Then in will do the same for the pictures in SignRecognition/DATA/DATABASE directory 		porting them into another array (X_data).
 <br />
-<br /> No comparison algorithm running yet, but will implement a sci-images one in a double 		for loop for next patch. 
+<br /> No comparison algorithm running yet, but will implement a sci-images one in a double for loop for next patch. 
+<br />
 <br /> ** Also can run: python Empty_Output_Directory.py
 <br /> to empty out the SignRecognition/DATA/EXPORT after every run.
+<br />
 <br />  ***Also need to change directory paths to match your configuration in all python files run. 
-
+<br />
 	Description of the Project
 The idea behind this project is to successfully capture a sequence of American Sign Language symbols via camera and, through image processing, translate the hand gestures into English text.
 
