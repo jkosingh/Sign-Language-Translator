@@ -8,7 +8,8 @@ import keyboard
 import glob
 import numpy as np
 
-dir = "/home/jsingh/Codeblocks Projects/PROJECT/SignRecognition/TEST_VIDS/big_buck_bunny_720p_5mb.mp4"
+#dir = "/home/jsingh/Codeblocks Projects/PROJECT/SignRecognition/TEST_VIDS/big_buck_bunny_720p_5mb.mp4"
+dir = "/home/jsingh/Codeblocks Projects/PROJECT/SignRecognition/TEST_VIDS/Learn ASL Alphabet Video.mp4"
 vidcap = cv2.VideoCapture(dir)
 success,image = vidcap.read()
 count = 0  # initialize counter
