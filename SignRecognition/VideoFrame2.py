@@ -2,8 +2,8 @@ from skimage.measure import compare_ssim
 import argparse
 import imutils
 import cv2
-import cv
-#import os
+#import cv
+import os
 import keyboard
 import glob
 import numpy as np
@@ -12,18 +12,20 @@ import skimage.transform
 import matplotlib.pyplot as plt
 import scipy
 
-dir = "/home/jsingh/Codeblocks Projects/PROJECT/SignRecognition/TEST_VIDS/big_buck_bunny_720p_5mb.mp4"
+dir = "/home/jsingh/Codeblocks Projects/PROJECT/SignRecognition/TEST_VIDS/Learn ASL Alphabet Video.mp4"
 
 
 vidcap = cv2.VideoCapture(dir)
 success,image = vidcap.read()
 count = 0  # initialize counter
 while success:
-  vidcap.set(cv2.cv.CV_CAP_PROP_POS_MSEC,(count*5000))    # Change multiple on count for number of frames taken  
+  vidcap.set(cv2.cv.CV_CAP_PROP_POS_MSEC,(count*1000))    # Change multiple on count for number of frames taken  
   cv2.imwrite("/home/jsingh/Codeblocks Projects/PROJECT/SignRecognition/DATA/EXPORT/frame%d.jpg" % count, image)     # save frame as JPEG file
   success,image = vidcap.read()
   print('Read a new frame: ', success, ' ', count)
   count += 1
+  if count > 100: #Here because idk why ASL video never ends...
+    success = False
   comp = False
 
 if success == False:
@@ -61,10 +63,11 @@ if comp == True:
        if s > tolerance:
 	 counted+=1
          print("Files still in folder: ", counted)
+	 print("SSIM Value: ", s)
 	 WantToDelete = False
      if WantToDelete:    
      	#delete picture from database
-	print("{}".format(export[i]))	
+	print("{}".format(export[i]), "SSIM Value: ", s)	
 	os.remove("{}".format(export[i]))	
      	deleted+=1
      	#print("Files deleted: ", deleted)
