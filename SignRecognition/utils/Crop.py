@@ -11,14 +11,18 @@ class Crop:
         self.width = w
         self.height = h
 
+
+    def create_croppings(self):
+        # stub
+
     # Crops the given image to the specified width and height
     def crop(self, width, height, image):
         # stub
-        if self.inBounds():
+        if self.in_bounds():
             # if in bounds then take the array of
 
     # Checks if the pixels are greater than the width or height of the given image
-    def inBounds(self, num, dir):
+    def in_bounds(self, num, dir):
         if dir == "right"
             if (num + self.shift) > self.width:
                 return False
