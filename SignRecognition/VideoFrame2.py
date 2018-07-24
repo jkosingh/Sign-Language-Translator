@@ -13,7 +13,7 @@ import math, operator
 import matplotlib.pyplot as plt
 import scipy
 
-dir = "\Users\justi\Downloads\Sign-Language-Translator-master\SignRecognition\TEST_VIDS\Learn ASL Alphabet Video.mp4"
+dir = "C:/Users/Chair/Documents/GitHub/Sign-Language-Translator/SignRecognition/TEST_VIDS/Learn ASL Alphabet Video.mp4"
 
 
 # def mse(imageA, imageB):
@@ -32,7 +32,7 @@ success, image = vidcap.read()
 count = 0  # initialize counter
 while success:
     vidcap.set(cv2.CAP_PROP_POS_MSEC, (count * 1000))  # Change multiple on count for number of frames taken
-    cv2.imwrite("\Users\justi\Downloads\Sign-Language-Translator-master\SignRecognition\DATA\EXPORT\ frame%d.jpg" % count,
+    cv2.imwrite("C:/Users/Chair/Documents/GitHub/Sign-Language-Translator/SignRecognition/DATA/EXPORT/frame%d.jpg" % count,
                 image)  # save frame as JPEG file
     success, image = vidcap.read()
     print('Read a new frame: ', success, ' ', count)
@@ -44,7 +44,7 @@ while success:
 if success == False:
     print('DONE SPLICING VIDEO INTO FRAMES')
     Y_data = []  # Frames from video
-    export = glob.glob("\Users\justi\Downloads\Sign-Language-Translator-master\SignRecognition\DATA\EXPORT\*.jpg")
+    export = glob.glob("C:/Users/Chair/Documents/GitHub/Sign-Language-Translator/SignRecognition/DATA/EXPORT*.jpg")
     for pegs in export:
         frames = cv2.imread(pegs)
         Y_data.append(frames)  # array to hold exported pictures
