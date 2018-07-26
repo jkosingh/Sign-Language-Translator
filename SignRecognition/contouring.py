@@ -77,20 +77,6 @@ def make_skin_white(frame):
     return frame
 
 
-def remove_arm(frame):
-    """
-    Removes the human arm portion from the image.
-    """
-    # print("Removing arm...")
-
-    # Cropping 15 pixels from the bottom.
-    height, width = frame.shape[:2]
-    frame = frame[:height - 15, :]
-
-    # print("Done!")
-    return frame
-
-
 def find_largest_contour_index(contours):
     """
     Finds and returns the index of the largest contour from a list of contours.
@@ -128,6 +114,7 @@ def draw_contours(frame):
                      largest_contour_index, (255, 255, 255), thickness=-1)
 
     # Draw a rectangle around the contour perimeter
+
     contour_dimensions = cv2.boundingRect(contours[largest_contour_index])
     # cv2.rectangle(sign_image,(x,y),(x+w,y+h),(255,255,255),0,8)
 
@@ -151,10 +138,10 @@ def centre_frame(frame, contour_dimensions):
         square_side / 2, height_half + square_side / 2
     width_min, width_max = width_half - square_side / 2, width_half + square_side / 2
 
-    if (height_min >= 0 and height_min < height_max and width_min >= 0 and width_min < width_max):
-        frame = frame[height_min:height_max, width_min:width_max]
-    else:
-        log_message = "No contour found!!"
+    # if (height_min >= 0 and height_min < height_max and width_min >= 0 and width_min < width_max):
+    #     frame = frame[height_min:height_max, width_min:width_max]
+    # else:
+    #     log_message = "No contour found!!"
         # raise Exception(log_message)
 
     #print("Done!")
@@ -169,5 +156,5 @@ def apply_image_transformation(raw):
     #frame = remove_arm(frame)
     frame, contour_dimensions = draw_contours(frame)
     frame = centre_frame(frame, contour_dimensions)
-    #frame = resize_image(frame, 250)
+    # frame = resize_image(frame, 100)
     return frame

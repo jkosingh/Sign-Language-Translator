@@ -87,42 +87,68 @@ if success == False:
 
     #os.remove('frame%d.png'%j)
 
-count = 0
-match = 0
-
-def compare_images(imageA, imageB, title):
-    global count
-    count = count + 1
-
-    # compute the mean squared error and structural similarity
-    # index for the images
-
-    imageA2 = apply_image_transformation(imageA)
-    imageB2 = apply_image_transformation(imageB)
-
-    momentsA = cv2.HuMoments(cv2.moments(imageA2)).flatten()
-    momentsB = cv2.HuMoments(cv2.moments(imageB2)).flatten()
-
-    diff = momentsA - momentsB
-
-    print(str(count), map("{0:.16f}".format, diff))
-
+def pop_up(imageA, imageB, title):
     # setup the figure
     fig = plt.figure(title)
     # plt.suptitle("MSE: %.2f, SSIM: %.10f" % (m, s))
 
     # show first image
     ax = fig.add_subplot(1, 2, 1)
-    plt.imshow(imageA2, cmap=plt.cm.gray)
+    plt.imshow(imageA, cmap=plt.cm.gray)
     plt.axis("off")
 
     # show the second image
     ax = fig.add_subplot(1, 2, 2)
-    plt.imshow(imageB2, cmap=plt.cm.gray)
+    plt.imshow(imageB, cmap=plt.cm.gray)
     plt.axis("off")
 
     # show the images
     plt.show()
+
+count = 0
+match = 0
+alphabet = 0
+
+def compare_images(imageA, imageB, title):
+    global alphabet
+    global count
+
+    letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N",
+               "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
+    match = [15, 18, 19, 20, 21, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 38, 42, 43,
+             45, 47, 48, 49, 50, 57, 58, 60, 61, 62, 63, 65, 66, 67, 68, 70, 72, 73, 74, 75]
+
+    # compute the mean squared error and structural similarity
+    # index for the images
+
+    # print(str(count) + ". " + " Alphabet: " + letters[alphabet])
+
+    alphabet = alphabet + 1
+    try:
+        imageA2 = apply_image_transformation(imageA)
+        imageB2 = apply_image_transformation(imageB)
+    except:
+        return
+    if count in match:
+        value = cv2.matchShapes(imageA2, imageB2, 1, 0.0)
+    else:
+        return
+
+    if value < 0.0005:
+            print(str(count) + ". " + str(value) + " Alphabet: " + letters[alphabet - 1])
+            pop_up(imageA2, imageB2, title + "(transformed)")
+            # pop_up(imageA, imageB, title + "(original)")
+
+    if alphabet == 24:
+        alphabet = 0
+        count = count + 1
+
+    # momentsA = cv2.HuMoments(cv2.moments(imageA2)).flatten()
+    # momentsB = cv2.HuMoments(cv2.moments(imageB2)).flatten()
+
+    # diff = momentsA - momentsB
+
+    # print(str(count), map("{0:.16f}".format, diff))
 
 filenames2 = [img for img in glob.glob("C:/Users/Chair/Documents/GitHub/Sign-Language-Translator/SignRecognition/DATA/DATABASE/*.jpg")]
 
@@ -137,7 +163,7 @@ j2=0
 for img in Y_data:
     # load the images -- the original, the original + contrast,
     #original = cv2.imread(img)
-    original = img[150:550,200:1100]
+    original = img[175:550, 550:825]
     #original = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
     #####################################################
 
@@ -146,7 +172,7 @@ for img in Y_data:
 
     for img2 in filenames2:
         contrast = cv2.imread(img2)
-        #contrast = cv2.flip(contrast, 1)
+        contrast = cv2.flip(contrast, 1)
 
         # convert the images to grayscale
 
