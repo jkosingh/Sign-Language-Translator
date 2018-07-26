@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 import glob
 import os
 from skimage.measure import compare_ssim as ssim
+from skimage.measure import compare_mse as mse
 import skimage.transform
 from skimage import io, color
 from contouring import apply_image_transformation
@@ -87,10 +88,10 @@ if success == False:
 
     #os.remove('frame%d.png'%j)
 
-def pop_up(imageA, imageB, title):
+def pop_up(imageA, imageB, title, m, s):
     # setup the figure
     fig = plt.figure(title)
-    # plt.suptitle("MSE: %.2f, SSIM: %.10f" % (m, s))
+    plt.suptitle("MSE: %.2f, SSIM: %.10f" % (m, s))
 
     # show first image
     ax = fig.add_subplot(1, 2, 1)
@@ -123,21 +124,27 @@ def compare_images(imageA, imageB, title):
 
     # print(str(count) + ". " + " Alphabet: " + letters[alphabet])
 
-    alphabet = alphabet + 1
     try:
         imageA2 = apply_image_transformation(imageA)
         imageB2 = apply_image_transformation(imageB)
+        value_s = ssim(imageA2, imageB2, multichannel=True)
+        value_m = mse(imageA2, imageB2)
+        print(str(count) + ". SSIM: " + str(value_s) + " MSE: " + str(value_m) + " Letter: " + letters[alphabet])
+        alphabet = alphabet + 1
+        if value_s > 0.75 and value_m < 10000:
+            pop_up(imageA, imageB, title, value_m, value_s)
     except:
-        return
-    if count in match:
-        value = cv2.matchShapes(imageA2, imageB2, 1, 0.0)
-    else:
-        return
+        pass
 
-    if value < 0.0005:
-            print(str(count) + ". " + str(value) + " Alphabet: " + letters[alphabet - 1])
-            pop_up(imageA2, imageB2, title + "(transformed)")
-            # pop_up(imageA, imageB, title + "(original)")
+    # if count in match:
+    #     value = cv2.matchShapes(imageA2, imageB2, 1, 0.0)
+    # else:
+    #     return
+
+    # if value < 0.0005:
+    #         print(str(count) + ". " + str(value) + " Alphabet: " + letters[alphabet - 1])
+    #         pop_up(imageA2, imageB2, title + "(transformed)")
+    #         # pop_up(imageA, imageB, title + "(original)")
 
     if alphabet == 24:
         alphabet = 0

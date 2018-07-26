@@ -150,11 +150,11 @@ def centre_frame(frame, contour_dimensions):
 
 def apply_image_transformation(raw):
     # Downsize it to reduce processing time.
-    frame = resize_image(raw, 640)
+    frame = resize_image(raw, 100)
     frame = make_background_black(frame)
     frame = make_skin_white(frame)
-    #frame = remove_arm(frame)
+    # frame = remove_arm(frame)
     frame, contour_dimensions = draw_contours(frame)
     frame = centre_frame(frame, contour_dimensions)
-    # frame = resize_image(frame, 100)
+    frame = resize_image(frame, 30)
     return frame
