@@ -6,8 +6,10 @@ import os
 from skimage.measure import compare_ssim as ssim
 from skimage.transform import resize
 from skimage.transform import rescale
+from PIL import Image
 import skimage.transform
 from skimage import io, color
+from scipy.ndimage import imread
 #https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
 dir = "\Users\justi\Downloads\Sign-Language-Translator-master\SignRecognition\TEST_VIDS\Learn ASL Alphabet Video.mp4"
 vidcap = cv2.VideoCapture(dir)
@@ -45,6 +47,19 @@ if success == False:
 print('Frames to compare array size', len(Y_data))
 print('Database Array size:', len(X_data))
 print('DONE CREATING ARRAYS TO COMPARE')
+
+def resize_image_aspect_ratio(image, new_width=None, new_height=None):
+    height, width = image.shape[:2]
+    if new_width is not None and new_height is None:
+        r = new_width/width
+        new_height = int(height*r)
+    elif new_width is None and new_height is not None:
+        r = new_height/height
+        new_width = int(width*r)
+    new_image = cv2.resize(image, (new_height, new_width))
+    #print("New Image Shape: ", new_image.shape)
+    return new_image
+
 def mse(imageA, imageB):
     # the 'Mean Squared Error' between the two images is the
     # sum of the squared difference between the two images;
@@ -62,7 +77,7 @@ def compare_images(imageA, imageB, pic1, pic2, title):
     # index for the images
     m = mse(imageA, imageB)
     s = ssim(imageA, imageB, multichannel=True)
-    if(m < 6000 and s> 0.51):
+    if(m < 6000 and s> 0.9):
         # setup the figure
 
         print("found a match !!!!!!!!!!")
@@ -92,8 +107,15 @@ for i in range(0, len(Y_data)):
             dbase = cv2.cvtColor(X_data[j], cv2.COLOR_BGR2GRAY)
             rames = cv2.cvtColor(Y_data[i], cv2.COLOR_BGR2GRAY)
             rames = rames[150:550,200:1100]
-            dbase = dbase[150:550,200:1100]
+            #dbase = dbase[150:550,200:1100]
             #rames = resize(rames, dbase.shape, mode='constant')
-            rames = resize(rames, dbase.shape, preserve_range=True)
-            compare_images(rames, dbase, export[i], database[j], "FRAMES vs. Database")
+            wi, he = dbase.shape
+            #print("Shape: ", dbase.shape, " Width: ", wi, " Height", he)
+
+            #resize_image_aspect_ratio(rames,wi,he)
+            #print(" Frame Shape: ", rames.shape)
+
+
+            #rames = resize(rames, dbase.shape, preserve_range=True)
+            compare_images(resize_image_aspect_ratio(rames,wi,he), dbase, export[i], database[j], "FRAMES vs. Database")
 
